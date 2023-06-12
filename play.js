@@ -4,7 +4,16 @@ const net = require("net");
 const connect = function() {
   const conn = net.createConnection({
     host: "localhost",
-    port: 3000,
+    port: 50541,
+  });
+
+  
+  conn.on("connect", () => {
+    console.log("Connection established");
+  });
+
+  conn.on("data", (data) => {
+    console.log("Server says: ", data);
   });
 
   conn.setEncoding("utf8");
