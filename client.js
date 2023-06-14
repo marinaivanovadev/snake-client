@@ -9,7 +9,26 @@ const connect = function() {
   conn.on("connect", () => {
     console.log("Connection established");
     conn.write("Name: MI");
+    // conn.write("Move: up");
+    // conn.write("Move: down");
+    // conn.write("Move: left");
+    // conn.write("Move: right");
+
+    // setTimeout(() => {
+    //   conn.write('Move: up');
+    // }, 50);
+
+    // setTimeout(() => {
+    //   conn.write('Move: up');
+    // }, 100);
+
+    // setInterval(() => {
+    //   conn.write('Move: up');
+    // }, 50);
+
   });
+
+
 
   conn.on("data", (data) => {
     console.log("Server says: ", data);
