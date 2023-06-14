@@ -21,6 +21,8 @@ const setupInput = function(conn) {
       connection.write("Move: right");
     } else if (key === "p") {
       connection.write("Say: Hi, Marina is here!");
+    } else if (key === "b") {
+      connection.write("Say: Bye, bye!");
     }
   };
 
