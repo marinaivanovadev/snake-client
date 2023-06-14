@@ -19,14 +19,14 @@ const setupInput = function(conn) {
       connection.write("Move: down");
     } else if (key === "d") {
       connection.write("Move: right");
+    } else if (key === "p") {
+      connection.write("Say: Hi, Marina is here!");
     }
   };
 
   stdin.on("data", (key) => handleUserInput(key));
   return stdin;
 };
-
-
 
 module.exports = {
   setupInput
