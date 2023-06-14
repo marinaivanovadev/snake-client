@@ -1,4 +1,5 @@
 const net = require('net');
+const { setupInput } = require('./play');
 
 const connect = function() {
   const conn = net.createConnection({
@@ -28,20 +29,18 @@ const connect = function() {
 
   });
 
-
-
   conn.on("data", (data) => {
     console.log("Server says: ", data);
   });
 
   conn.on("connect", (connect) => {
     console.log("Successfully connected to game server");
-    
   });
 
   conn.setEncoding("utf8");
 
   return conn;
+ 
 
 };
 module.exports = {
