@@ -1,5 +1,7 @@
 let connection;
 
+
+// Setup user input
 const setupInput = function(conn) {
   connection = conn;
   const stdin = process.stdin;
@@ -8,7 +10,7 @@ const setupInput = function(conn) {
   stdin.resume();
 
   const handleUserInput = function(key) {
-    if (key === '\u0003') {
+    if (key === '\u0003') { // Terminate the game with CTRL + C
       process.exit();
     }
     if (key === "w") {

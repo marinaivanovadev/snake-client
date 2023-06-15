@@ -1,42 +1,48 @@
 const net = require('net');
-const { setupInput } = require('./play');
 const { IP, PORT } = require("./constants");
 
+// establish connection with server
 const connect = function() {
   const conn = net.createConnection({
     host: IP,
     port: PORT
   });
   
+
   conn.on("connect", () => {
     console.log("Connection established");
     conn.write("Name: MI");
-    
-    // setTimeout(() => {
-    //   conn.write('Move: up');
-    // }, 50);
-
-    // setTimeout(() => {
-    //   conn.write('Move: up');
-    // }, 100);
-
-    // setInterval(() => {
-    //   conn.write('Move: up');
-    // }, 50);
-
+      
   });
-
+  // listen data from server
   conn.on("data", (data) => {
     console.log("Server says: ", data);
   });
-
-  conn.on("connect", (connect) => {
+  // confirm successful conection
+  conn.on("connect", () => {
     console.log("Successfully connected to game server");
   });
+  // confirm that connection closed by the server
+  conn.on("end", () => {
+    console.log("Connection closed by the server.");
+  });
+  //show if there is an error and show the error
+  conn.on("error", (error) => {
+    console.log("Connection error:", error);
+  });
+  conn.on("close", () => {
+    console.log("Connection closed. Enter CTRL + C");
+  });
+
+  // conn.on('connect', () => {
+  //   setInterval(() => {
+  //     conn.write('Move: up');
+  //   }, 100);
+  // });
 
   conn.setEncoding("utf8");
   return conn;
 };
 module.exports = {
-  connect
+  connect,
 };
