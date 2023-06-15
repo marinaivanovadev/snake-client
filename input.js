@@ -1,4 +1,5 @@
 let connection;
+let direction = null;
 
 
 // Setup user input
@@ -14,13 +15,13 @@ const setupInput = function(conn) {
       process.exit();
     }
     if (key === "w") {
-      connection.write("Move: up");
+      direction = "up";
     } else if (key === "a") {
-      connection.write("Move: left");
+      direction = "left";
     } else if (key === "s") {
-      connection.write("Move: down");
+      direction = "down";
     } else if (key === "d") {
-      connection.write("Move: right");
+      direction = "right";
     } else if (key === "p") {
       connection.write("Say: Hi, Marina is here!");
     } else if (key === "b") {
@@ -28,7 +29,22 @@ const setupInput = function(conn) {
     }
   };
 
-  stdin.on("data", (key) => handleUserInput(key));
+  // Always move in one direction
+  const moveSnake = function() {
+    if (direction !== null) {
+      connection.write(`Move: ${direction}`);
+    }
+  };
+    
+  const interval = setInterval(moveSnake, 100);
+  
+  stdin.on("data", (key) => {
+    handleUserInput(key);
+    // Clear interval when the key released
+    if (direction === null) {
+      clearInterval(interval);
+    }
+  });
   return stdin;
 };
 

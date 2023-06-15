@@ -31,14 +31,9 @@ const connect = function() {
     console.log("Connection error:", error);
   });
   conn.on("close", () => {
-    console.log("Connection closed. Enter CTRL + C");
+    console.log("Connection closed.");
+    process.exit();
   });
-
-  // conn.on('connect', () => {
-  //   setInterval(() => {
-  //     conn.write('Move: up');
-  //   }, 100);
-  // });
 
   conn.setEncoding("utf8");
   return conn;
